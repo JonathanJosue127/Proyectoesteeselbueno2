@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { DrawerNavigation } from "./Stack";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { auth } from "./firebase";
 
 const Drawer = createDrawerNavigator()
 
@@ -24,18 +25,13 @@ const Profile = () => {
               Profile           
             </Heading>
 
-            <div align="center"><Image style={{ width: 150, height: 150, marginBottom: 15 }} source={require("./Imagenes/Perfil.jpeg")}/></div>
-            <FormControl.Label>Name(s):</FormControl.Label>
-            <FormControl.Label>Jonathan</FormControl.Label>
-
-            <FormControl.Label>Last Name:</FormControl.Label>
-            <FormControl.Label>Villanueva</FormControl.Label>
-
+            <div align="center"><Image style={{ width: 150, height: 150, marginBottom: 15 }} source={'https://th.bing.com/th/id/R.123a2762616b39c65fe8a1a121252ccd?rik=UGyHjXnEbIV78g&pid=ImgRaw&r=0'}/></div>
+            
             <FormControl.Label>Email:</FormControl.Label>
-            <FormControl.Label>Jonnysupergenial127@outlook.com</FormControl.Label>
+            <FormControl.Label>{auth.currentUser?.email}</FormControl.Label>
 
             <FormControl.Label>Password:</FormControl.Label>
-            <FormControl.Label>**************</FormControl.Label>
+            <FormControl.Label>************</FormControl.Label>
         <h1></h1>
 
             <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('Settings')} >

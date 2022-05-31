@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator, DrawerContentScrollView } from "@react-navigation/drawer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { DrawerNavigation } from "./Stack";
+import { auth } from "./firebase";
 
 
 const Drawer = createDrawerNavigator()
@@ -13,10 +14,20 @@ const Drawer = createDrawerNavigator()
 
 
 const Menu = () => {
+  const handleSignOut = () =>{
+    auth
+    .signOut()
+    .then(()=>{
+      navigation.replace('Login')
+    })
+    .catch(error => alert(error.message))
+  }
   const navigation = useNavigation();
 
     return (
 <Box safeArea p="2" py="8" w="90%" maxW="400">
+ 
+
         <Heading   size="lg" fontWeight="600"  _dark={{
             color: "black"
           }}>
@@ -35,13 +46,17 @@ const Menu = () => {
             </Heading>
 
             <Image style={{ width: 350, height: 180, marginBottom: 15 }} source={require("./Imagenes/Menuimg.jpg")}/>
-
             <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('MedicalApppoint')} >
             Medical appointment
           </Button>
 
           <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('Schedule')} >
-Schedule appointment          </Button>
+            Schedule appointment          
+          </Button>
+
+          <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('RecipesUser')} >
+            Recipes          
+          </Button>
 
           <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('Catalogue')} >
             Catalogue
@@ -51,9 +66,6 @@ Schedule appointment          </Button>
             Information about doctors and services
           </Button>
 
-          <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('Prescriptions')} >
-            Prescriptions
-          </Button>
 
           <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('MedRec')} >
             Medical record
@@ -69,6 +81,10 @@ Schedule appointment          </Button>
 
           <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('Profile')} >
             Profile
+          </Button>
+
+          <Button mt="2" colorScheme="indigo" title="Menu" onPress={handleSignOut} >
+            Logout
           </Button>
 </Box>
 

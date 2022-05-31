@@ -11,31 +11,26 @@ import firebase from "./firebase";
 
 
 const Drawer = createDrawerNavigator();
-const Schedule = (props) => {
+const Recipes = (props) => {
   const navigation = useNavigation();
-
+//Colección: Recipes
+//Valores: Usuario, Medicamento
   const [state,setState] = useState({
-    Hospital: '',
-    Doctor: '',
-    Reason: '',
-    Date: '',
-    Time: ''
+    Usuario: '',
+    Medicamento: ''
   });
 //Altas
 const citas = async() =>{
-  if (state.Hospital ==='' || state.Doctor ==='' ||state.Reason ==='' ||state.Date ==='' ||state.Time ===''){
+  if (state.Usuario ==='' || state.Medicamento ===''){
     alert('Please complete all fields')
   }else {
     console.log(state)
-    firebase.db.collection('Schedule').add({
-      Centro: state.Hospital,
-      Fecha: state.Date,
-      Hora: state.Time,
-      Medico: state.Doctor,
-      Motivo: state.Reason
+    firebase.db.collection('Recipe').add({
+      Usuario: state.Usuario,
+      Medicamento: state.Medicamento
 
     })
-    alert('Appointment created')
+    alert('Recipe created')
    //No funciona xd
     //props.navigation.navigate('ScheduleCreated');
   }
@@ -55,11 +50,9 @@ const citas = async() =>{
           
       <FormControl w="3/4" maxW="300" isRequired isInvalid>
         <FormControl.Label>Choose medical center</FormControl.Label>
-        <FormControl.Label>Hospital:</FormControl.Label>
-            <Input  onChangeText={(value)=>handleChangeHospital('Hospital',value)}/>
-        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-          Please make a selection!
-        </FormControl.ErrorMessage>
+        <FormControl.Label>User:</FormControl.Label>
+            <Input  onChangeText={(value)=>handleChangeHospital('Usuario',value)}/>
+        
       </FormControl>
     </Center>
 
@@ -67,30 +60,15 @@ const citas = async() =>{
 
     <Center>
       <FormControl w="3/4" maxW="300" isRequired isInvalid>
-        <FormControl.Label>Choose Doctor</FormControl.Label>
-            <Input  onChangeText={(value)=>handleChangeHospital('Doctor',value)}/>
-        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-          Please make a selection!
-        </FormControl.ErrorMessage>
-
-
-        <FormControl.Label>Reason for consultation:</FormControl.Label>
-            <Input  onChangeText={(value)=>handleChangeHospital('Reason',value)}/>
-
-  <h6> Select the day and the time required for the appointment: </h6>
-            
-            <FormControl.Label>Date:</FormControl.Label>
-            <Input  onChangeText={(value)=>handleChangeHospital('Date',value)}/>
-            
-            <FormControl.Label>Time:</FormControl.Label>
-            <Input  onChangeText={(value)=>handleChangeHospital('Time',value)}/>
-
+        <FormControl.Label>Medicamento:</FormControl.Label>
+            <Input  onChangeText={(value)=>handleChangeHospital('Medicamento',value)}/>
+        
 
             <Button mt="2" colorScheme="indigo" title="Menu" onPress={()=>citas()} >
-            Schedule
+            Recipes
           </Button>
 
-          <Button mt="2" colorScheme="indigo" title="Menu" onPress={() => navigation.navigate('ScheduleCreated')} >
+          <Button mt="2" colorScheme="indigo" title="Menu" onPress={()=> navigation.navigate('RecipeCreated')} >
           Scheduled appointments
           </Button>
 
@@ -108,7 +86,7 @@ const citas = async() =>{
             return (
                <NativeBaseProvider>
                  <Center flex={1} px="3">
-                     <Schedule/>
+                     <Recipes/>
                  </Center>
                </NativeBaseProvider>
              );

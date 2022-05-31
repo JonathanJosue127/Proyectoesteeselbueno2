@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { DrawerNavigation } from "./Stack";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-
+//No se usa esta pantalla
 const Drawer = createDrawerNavigator()
 
 const Prescriptions = () => {
